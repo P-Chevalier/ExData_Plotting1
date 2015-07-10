@@ -14,7 +14,7 @@ library("data.table")
 
 # Check to see if household_power_consumption.txt exists in the current working directory
 if ((!file.exists("./household_power_consumption.txt"))) {
-        stop("household_power_consumption.txt file is missing - please download file to continue")
+        stop("household_power_consumption.txt file is missing - please download the file to continue")
 }
 
 # Read in only the 1/2/2007 data
@@ -32,18 +32,19 @@ date_time<-strptime(paste(alldf$V1, alldf$V2, sep=" "),"%d/%m/%Y %H:%M:%S")
 # Create the png file
 png("plot4.png", width=480, height=480, units="px")
 
+# Create a multi-paneled plotting window.
 par(mfcol=c(2,2))
 
-# Create the 2 plot
+# Create the 1st plot
 plot(date_time, alldf$V3, type="l", xlab=NA, ylab="Global Active Power")
 
-# Create the 3 plot
+# Create the 2nd plot
 plot(date_time, alldf$V7, type="l", xlab=NA, ylab="Energy sub metering")
 points(date_time, alldf$V8, type="l", col="red")
 points(date_time, alldf$V9, type="l", col="blue")
 legend("topright", lty=c(1,1,1), bty="n", col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
-# Create the next plot
+# Create the 3rd plot
 plot(date_time, alldf$V5, type="l", xlab="datetime", ylab="Voltage")
 
 # Create the last plot
